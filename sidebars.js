@@ -23,18 +23,26 @@ const sidebars = {
         'introduction/what_is_goblitz',
         'introduction/architecture',
         'introduction/folder_structure',
+        'introduction/getting_started',
       ],
     },
     {
       type: 'category',
-      label: 'Getting Started',
+      label: 'Authentication',
       items: [
-        'getting-started/quick-start/quick_start',
+        'authentication/introduction',
+        {
+          type: 'category',
+          label: 'Cloud Providers',
+          items: [
+            'authentication/aws/cognito',
+          ],
+        },
       ],
     },
     {
       type: 'category',
-      label: 'Frontend Development',
+      label: 'Frontend',
       items: [
         'frontend/developing_goblitz',
         'frontend/react',
