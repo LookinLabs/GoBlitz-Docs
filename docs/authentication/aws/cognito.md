@@ -5,6 +5,10 @@ sidebar_label: "Cognito"
 
 Cognito is a fully managed identity service provided by AWS. It allows you to easily add user sign-up, sign-in, and access control to your applications. GoBlitz uses Cognito as an authentication provider for securing API Paths and Web Routes via JWT Tokens.
 
+## Architecture
+
+<img src="/img/auth_arch.png" alt="Architectural overview of authentication" width="600" height="600"></img>
+
 ## Getting Started
 
 Before we start setting up the application against Cognito, make sure you have the following prerequisites. Cognito can be set up in a free tier account - you can check the pricing [here](https://aws.amazon.com/cognito/pricing/).

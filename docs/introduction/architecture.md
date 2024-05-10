@@ -9,7 +9,7 @@ Controller itself communicates with the model (M) component and repository layer
 
 You can take a look for the [GET Users Query](/examples/get_users_query) which explains the works between layers and components.
 
-<img src="/img/image.png" alt="Architectural overview" width="1000" height="400"></img>
+<img src="/img/image.png" alt="Architectural overview" width="1400" height="500"></img>
 
 ## Features
 
