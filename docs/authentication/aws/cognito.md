@@ -21,7 +21,7 @@ Cognito can be set up via terraform code under aws/terraform directory. This cod
 1. Change the directory
 
 ```bash
-cd aws/terraform
+cd cloud/aws/terraform
 ```
 
 2. Initialize the terraform

@@ -6,6 +6,7 @@ sidebar_label: "Folder Structure"
 GoBlitz Web Framework has the following folder structure:
 
 - `bin` - Binary folder mostly used for different scripts for contribution
+- `cloud` - Cloud folder for the cloud infrastructure code and resources (e.g Terraform, Cloudformation)
 - `controller` - The Controller component of MVC architecture. Responsible of receiving the request and sending the response while communicating with the model and repository layer
 - `middleware` - The Middleware layer of the framework. A HTTP Router which routes the requests to the controller and returns the respones. It also has necessary security checks for the HTTP Protocol
 - `migrations` - The Migrations folder for the Goose (SQL) migrations
