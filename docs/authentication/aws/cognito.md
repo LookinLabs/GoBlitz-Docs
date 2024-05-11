@@ -79,7 +79,13 @@ The `AWS_COGNITO_API_USER_EMAIL` and `AWS_COGNITO_API_USER_PASSWORD` are the ema
 
 You can leave AWS_COGNITO_JWT_TOKEN empty. It will be filled after third step.
 
-3. Get the JWT Token
+3. Install python packages
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
+4. Get the JWT Token
 
 You can get the JWT Token by running the following command:
 
@@ -87,17 +93,17 @@ You can get the JWT Token by running the following command:
 python3 bin/fetch_jwt.py
 ```
 
-4. Configure AWS_COGNITO_JWT_TOKEN
+5. Configure AWS_COGNITO_JWT_TOKEN
 
 Configure the JWT Token in the .env file.
 
-5. Run the application
+6. Run the application
 
 ```bash
 make
 ```
 
-6. Visit some API Path
+7. Visit some API Path
 
 Try to visit some path via Curl or browser. In case you're not setting up the JWT Token, you will get a 401 Unauthorized error.
 
