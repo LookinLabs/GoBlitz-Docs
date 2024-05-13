@@ -74,16 +74,24 @@ AWS_COGNITO_APP_CLIENT_ID=client_id
 
 By default it's `https://goblitz.auth.us-east-1.amazoncognito.com/oauth2/token`
 
-The `AWS_COGNITO_API_USER_EMAIL` and `AWS_COGNITO_API_USER_PASSWORD` are the email and password of the user you signed up with.
+The `AWS_COGNITO_API_USER_EMAIL` and `AWS_COGNITO_API_USER_PASSWORD` are the email and password of the API User. This user is used to fetch the JWT Tokens from Cognito.
 
 
-3. Run the application
+3. Generate the `JWT_SECRET_KEY`
+
+Generate the JWT Secret Key by running the following command:
+
+```bash
+python3 bin/aws/cognito/generate_jwt_secret.py
+```
+
+4. Start the application
 
 ```bash
 make
 ```
 
-4. Visit some API Path
+5. Visit some API Path
 
 Try to visit some path via Curl or browser. In case you're not setting up the JWT Token, you will get a 401 Unauthorized error.
 
@@ -110,3 +118,5 @@ You can get the JWT Token by running the following command:
 ```bash
 python3 bin/fetch_jwt.py
 ```
+
+**Note** This method assumes that you have `AWS_COGNITO_API_USER_EMAIL` and `AWS_COGNITO_API_USER_PASSWORD` set in the .env file.
