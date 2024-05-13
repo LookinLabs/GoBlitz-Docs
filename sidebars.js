@@ -35,7 +35,13 @@ const sidebars = {
           type: 'category',
           label: 'Cloud Providers',
           items: [
-            'authentication/aws/cognito',
+            {
+              type: 'category',
+              label: 'AWS',
+              items: [
+                'authentication/aws/cognito',
+              ],
+            },
           ],
         },
       ],

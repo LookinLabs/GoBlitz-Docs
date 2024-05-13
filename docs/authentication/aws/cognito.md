@@ -1,6 +1,5 @@
 ---
 title: "Cognito"
-sidebar_label: "Cognito"
 ---
 
 Cognito is a fully managed identity service provided by AWS. It allows you to easily add user sign-up, sign-in, and access control to your applications. GoBlitz uses Cognito as an authentication provider for securing API Paths and Web Routes via JWT Tokens.
@@ -58,7 +57,7 @@ By default there will be `GoBlitzClient` application client. Click on that clien
 
 2. Configure the .env
 
-Configure Cognito Environment variables. The `AWS_COGNITO_USER_POOL_ID` and `AWS_COGNITO_CLIENT_ID` can be found in terminal after running `terraform apply` under `Changes on Outputs:`.
+Configure Cognito Environment variables. The `AWS_COGNITO_USER_POOL_ID` and `AWS_COGNITO_APP_CLIENT_ID` can be found in terminal after running `terraform apply` under `Changes on Outputs:`.
 
 ```
 Changes to Outputs:
@@ -68,42 +67,23 @@ Changes to Outputs:
 
 ```bash
 AWS_COGNITO_USER_POOL_ID=user_pool_id
-AWS_COGNITO_CLIENT_ID=client_id
+AWS_COGNITO_APP_CLIENT_ID=client_id
 ```
 
-`AWS_COGNITO_TOKEN_URL` is the URL to get the token from Cognito. It's in the format of `https://<user-pool-id>.auth.<region>.amazoncognito.com/oauth2/token`.
+`AWS_COGNITO_TOKEN_URL` is the URL to get the token from Cognito. It's in the format of `https://<user-pool>.auth.<region>.amazoncognito.com/oauth2/token`.
 
 By default it's `https://goblitz.auth.us-east-1.amazoncognito.com/oauth2/token`
 
 The `AWS_COGNITO_API_USER_EMAIL` and `AWS_COGNITO_API_USER_PASSWORD` are the email and password of the user you signed up with.
 
-You can leave AWS_COGNITO_JWT_TOKEN empty. It will be filled after third step.
 
-3. Install python packages
-
-```bash
-python3 -m pip install -r requirements.txt
-```
-
-4. Get the JWT Token
-
-You can get the JWT Token by running the following command:
-
-```bash
-python3 bin/fetch_jwt.py
-```
-
-5. Configure AWS_COGNITO_JWT_TOKEN
-
-Configure the JWT Token in the .env file.
-
-6. Run the application
+3. Run the application
 
 ```bash
 make
 ```
 
-7. Visit some API Path
+4. Visit some API Path
 
 Try to visit some path via Curl or browser. In case you're not setting up the JWT Token, you will get a 401 Unauthorized error.
 
@@ -111,4 +91,22 @@ Try to visit some path via Curl or browser. In case you're not setting up the JW
 curl -X GET http://localhost:8000/api/v1/ping
 
 {"error": "401 Unauthorized Error. Token Not Found."}
+```
+
+## Fetching JWT Tokens
+
+**Note** To fetch JWT Tokens from Cognito, you need to have configured AWS_COGNITO_* environment variables.
+
+1. Install python packages
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
+2. Get the JWT Token
+
+You can get the JWT Token by running the following command:
+
+```bash
+python3 bin/fetch_jwt.py
 ```
