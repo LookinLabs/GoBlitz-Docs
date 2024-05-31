@@ -36,6 +36,7 @@ const sidebars = {
       type: 'category',
       label: 'Frontend Development',
       items: [
+        'frontend/overview',
         'frontend/developing_goblitz',
         'frontend/react',
       ],

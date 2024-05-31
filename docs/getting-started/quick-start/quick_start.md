@@ -10,7 +10,7 @@ Right now GoBlitz doesn't support any native installation methods and is set as 
 **Step 2:** Clone the Repository
 
 ```bash
-git clone git://github.com/<your-username>/GoBlitz.git
+git clone git://github.com/LookinLabs/GoBlitz.git
 ```
 
 **Step 3:** Install the Dependencies
@@ -25,8 +25,19 @@ go mod tidy && go mod vendor
 cp .env.example .env
 ```
 
-**Step 5:** Run the Application
+**Step 5:** Setup the database and run migrations
 
 ```bash
-go run main.go
+docker-compose up -d db
+make migrate-up
 ```
+
+**Step 6:** Run the application
+
+```bash
+make run
+```
+
+**Step 7:** Visit the application in your browser
+
+Feel free to visit the application at `localhost:8000` and move around available paths.
