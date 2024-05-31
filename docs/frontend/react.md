@@ -7,6 +7,8 @@ In case of using React, Vue or any other framework, it's recommended to run [bin
 
 It automatically clean ups the views (welcome page only) and sets up basic index.html into public folder. It also creates `frontend` which should be used for the React, Vue or any other frontend framework.
 
+In case of using other frameworks, the assets are served under /assets path in `public/assets` folder. So if you want to use some CSS file, you should put it in `public/assets/css` folder and then link it in the index.html file.
+
 > [!WARNING]
 > When running `yarn build` or `npm run build` - you must move all the static files to the `public` folder.
 
