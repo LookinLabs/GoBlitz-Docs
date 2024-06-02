@@ -35,8 +35,8 @@ make migrate-up
 **Step 6:** Setup the API Key for the STATUSPAGE_API_KEY variable
 
 ```
-python3 bin/api/generate_api_key.py
-
+go run bin/api/generate_api_key.go
+Output: generated_key
 // Open .env
 STATUSPAGE_API_KEY = "generated_key"
 ```
