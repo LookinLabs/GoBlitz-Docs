@@ -26,32 +26,24 @@ import (
 )
 
 func GetUsers() ([]model.User, error) {
-	rows, err := DB.Query("SELECT id, name FROM users")
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
 	var users []model.User
-	for rows.Next() {
-		var user model.User
-		if err := rows.Scan(&user.UserID, &user.Name); err != nil {
-			return nil, err
-		}
-		users = append(users, user)
+	result := DB.Find(&users)
+	if result.Error != nil {
+		return nil, result.Error
 	}
-
 	return users, nil
 }
+
 ```
 
-3. Create API Controller in `controller/api/get_users.go`, which uses this struct to fill the data
+3. Create API Controller in `controller/api/get_users.go`
 
 ```
 package api
 
 import (
 	"net/http"
+
 	sql "web/repository/db"
 
 	"github.com/gin-gonic/gin"
@@ -66,6 +58,7 @@ func GetUsers(c *gin.Context) {
 
 	c.JSON(http.StatusOK, users)
 }
+
 
 ```
 

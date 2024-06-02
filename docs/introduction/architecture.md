@@ -7,6 +7,8 @@ GoBlitz is a web framework built in layered + MVC Mesh architecture. GoBlitz mai
 
 Controller itself communicates with the model (M) component and repository layer. Model is responsible for the datastructure management while the repository layer is responsible for communication and queries between external services (like PSQL or Redis).
 
+There are also helping folders like bin, helpers, migrations etc. These folders are general and used in whole application.
+
 You can take a look for the [GET Users Query](/examples/get_users_query) which explains the works between layers and components.
 
 <img src="/img/image.png" alt="Architectural overview" width="1000" height="400"></img>
@@ -32,3 +34,5 @@ The GoBlitz web framework is built in a layered + MVC Mesh architecture. It has 
 - **Controller Component**: Responsible for the business logic and communication with the model and repository layer.
 - **Model Component**: Responsible for the datastructure management.
 - **Views Component**: Responsible for the browser view.
+
+GoBlitz also has helper folders like bin, helpers, migrations etc. which are general and used in whole application.

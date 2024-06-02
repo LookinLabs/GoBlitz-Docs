@@ -3,33 +3,45 @@ title: "GoBlitz Native"
 sidebar_label: "GoBlitz Native"
 ---
 
-**Note** GoBlitz Native frontend development is raw and not fully developed. It's recommended to use React, Vue or any other frontend framework for the frontend development.
+GoBlitz Native is an frontend framework used to develop frontend via Go and HTML Templates. The framework also supports **global assets** and **assets per page**. GoBlitz Native is meant to be used with static JS and CSS files.
 
-GoBlitz Native frontend development folders are mainly `views`, `middleware` and `public`. GoBlitz supports components similar to React, where you can define template components in `views/components` folder and then use them on the page in `views/pagename_page` folder. The static files (JS, CSS, IMG, Gif etc) of GoBlitz are served via `public` folder. 
+## Folder Structure
 
-The most powerful size of GoBlitz is the HTML Templating, where you can define the template values in `views/templates` folder and use them in `views/pagename_page/index.html` file.
+GoBlitz Native main folders are `views` and `middleware` and `helpers`. Middleware is a little component which serves HTML Templates and calls helpers for different HTTP processes (like serving assets based on user's frontend choice).
 
-**Note** It's highly recommended to have self-explanatory naming for the pages and components. By default GoBlitz uses syntax `pagename_page`.
+The folder is `views` which is used for the frontend development. It contains multiple folders:
 
-The Middleware is responsible for serving the HTML Templates, assets and API Routes. you can take a look at [Middleware serving HTML Template Sites](https://github.com/KostLinux/GoBlitz/blob/master/middleware/sites.go) and [HTTP Router](https://github.com/KostLinux/GoBlitz/blob/master/middleware/router.go) on line 40 & 61
+- `assets` - Contains the global assets which can be used in all pages
+- `components` - Contains the components which can be used in the pages
+- `error` - Contains the client side error pages, which can be served via `controller/error/client_http.go` and `middleware/router.go`
+- `*_page` - Contains the pages which are served via middleware
+- `templates` - Contains the template values which can be used in the pages
 
-## Static Assets
+## Developing with GoBlitz Native
 
-Assets (images, gifs, css, js files etc) are served from public folder. The relative path is `/assets`.
+### Assets
 
-You can look an example of importing assets in the [Welcome Page Code](https://github.com/KostLinux/GoBlitz/blob/master/views/welcome_page/welcome.html).
+As mentioned before, GoBlitz Native is a simple frontend framework used to develop browser views, which supports assets per page and global assets. Each page should've been created as a folder with the `_page` suffix. 
+
+The HTTP Helper (`helpers/http.go`) which is used in Middleware, looks for the all pages with the `_page` suffix and creates a route for the assets for each page. So for example if we have a page `welcome_page`, which's located in `views/welcome_page` and we have some css file stored in `views/welcome_page/assets/main.css`, then the route for the css in href parameter is `/welcome_page/assets/main.css`.
+
+Due to different purposes of using HTML Templated sites, the automatic routes for the pages themselves are not created. You have to setup a site in `sites.go` middleware and then create a route for the page in `router.go`. The route will call the site and serve the page.
+
+> **Note** Be careful of using assets per page, cause they might override the global assets.
+
+### Components
+
+GoBlitz Native supports components similar to React. You can define the components in `views/components` folder and then use them in the pages. By default the components use global assets.
+
+### Custom Client Side Errors
+
+The Custom Client Side Errors are handled by the `controller/error/client_http.go` and `middleware/router.go`. The error pages are stored in `views/error` folder and can be served via the middleware. Right now GoBlitz doesn't support Server Side Custom Errors (starting from 500, cause Gin doesn't support them).
 
 ## HTML Templates
 
 As mentioned before, GoBlitz supports HTML Templating. You can define the template values in `views/templates` folder and use them in `views/pagename_page/index.html` file.
 
 Example of using [HTML Templating in Status Page](https://github.com/KostLinux/GoBlitz/blob/master/views/templates/statuspage.go).
-
-## Error pages
-
-Error pages are handled by the [error controller](https://github.com/KostLinux/GoBlitz/blob/master/controller/error/http_errors.go). 
-
-Controller look whether the path is available or not and returns the view into middleware, which returns the response to user.
 
 ## Setting up a Status Page (example)
 
@@ -169,3 +181,5 @@ func servicesHealthHandler(serviceInfo model.StatusPage) map[string]string {
 Navigate into "APP_HOST:APP_PORT/status" for the results.
 
 In development case it can be `http://localhost:8000/status".
+
+**Note** The header and footer HTML files are defined in the `views/components` folder.

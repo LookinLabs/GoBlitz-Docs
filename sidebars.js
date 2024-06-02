@@ -34,8 +34,17 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Sessions',
+      items: [
+        'sessions/overview',
+        'sessions/sessions',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Frontend Development',
       items: [
+        'frontend/overview',
         'frontend/developing_goblitz',
         'frontend/react',
       ],
