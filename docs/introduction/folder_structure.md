@@ -7,7 +7,7 @@ GoBlitz Web Framework has the following folder structure:
 
 - `bin` - Binary folder mostly used for different scripts for contribution
 - `controller` - The Controller component of MVC architecture. Responsible of receiving the request and sending the response while communicating with the model and repository layer
-- `helperes` - The Helpers folder for the helper functions
+- `helpers` - The Helpers folder for the helper functions
 - `middleware` - The Middleware layer of the framework. A HTTP Router which routes the requests to the controller and returns the respones. It also has necessary security checks for the HTTP Protocol
 - `migrations` - The Migrations folder for the Goose (SQL) migrations
 - `model` - The Model component of MVC architecture. Responsible for the datastructure management
