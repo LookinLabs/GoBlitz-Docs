@@ -32,12 +32,21 @@ docker-compose up -d db
 make migrate-up
 ```
 
-**Step 6:** Run the application
+**Step 6:** Setup the API Key for the STATUSPAGE_API_KEY variable
+
+```
+python3 bin/api/generate_api_key.py
+
+// Open .env
+STATUSPAGE_API_KEY = "generated_key"
+```
+
+**Step 7:** Run the application
 
 ```bash
 make run
 ```
 
-**Step 7:** Visit the application in your browser
+**Step 8:** Visit the application in your browser
 
 Feel free to visit the application at `localhost:8000` and move around available paths.
