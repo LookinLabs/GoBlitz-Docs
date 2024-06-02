@@ -7,19 +7,25 @@ GoBlitz uses default session-based authentication written in Go. Controller uses
 
 The `Authentication` function is also used to make an apiKey based authentication for the Status Page.
 
-## Signup
+All the authentication methods are POST, which can be seen in middleware router file.
 
-On the signup the controller renders data from `loginFormData` struct and compares with the data in database. 
+## Sign Up
+
+On the sign up the controller renders data from `loginFormData` struct and compares with the data in database. 
 
 The controller uses model to check the user existence by getting a boolean value. If the user exists, the controller returns an error message. If the user doesn't exist, the controller creates a record in database about the user and sets the session.
 
-## Signin
+## Sign In
 
-On the signin the controller renders data from `loginFormData` struct and compares with the data in database. 
+On the sign in the controller renders data from `loginFormData` struct and compares with the data in database. 
 
 The controller uses model to check for the user existance and compares the password input with the encrypted record in database.
 
 If the user exists and the password is correct, the controller sets the session. If the user doesn't exist or the password is incorrect, the controller returns an error message.
+
+## Sign Out
+
+Sign Out controller just cleans up the session and removes it.
 
 ## Related files
 
