@@ -10,13 +10,20 @@ This guide shows the example of how to define a controller in GoBlitz Web Framew
 ```
 package model
 
+import (
+	"gorm.io/gorm"
+)
+
 type User struct {
-	UserID string `json:"user_id"`
-	Name   string `json:"name"`
+	gorm.Model
+	Email    string `gorm:"size64, index"`
+	Username string `gorm:"size64, index"`
+	Password string `gorm:"size255"`
 }
+
 ```
 
-2. Create a SQL Query in `repository/db/get_users.go`, which makes an SQL Query against database
+2. Create a SQL Query in `repository/db/users.go`, which makes an SQL Query against database
 
 ```
 package sql
@@ -25,18 +32,26 @@ import (
 	"web/model"
 )
 
-func GetUsers() ([]model.User, error) {
-	var users []model.User
-	result := DB.Find(&users)
-	if result.Error != nil {
-		return nil, result.Error
+var DB *gorm.DB
+
+func GetUsers() (model.User, error) {
+	var user model.User
+
+	transaction := DB.First(&user)
+	if transaction.Error != nil {
+		if errors.Is(transaction.Error, gorm.ErrRecordNotFound) {
+			return model.User{}, errors.New("user not found")
+		}
+
+		return model.User{}, transaction.Error
 	}
-	return users, nil
+
+	return user, nil
 }
 
 ```
 
-3. Create API Controller in `controller/api/get_users.go`
+3. Create API Controller in `controller/api/users.go`
 
 ```
 package api
@@ -58,8 +73,6 @@ func GetUsers(c *gin.Context) {
 
 	c.JSON(http.StatusOK, users)
 }
-
-
 ```
 
 4. Add into middleware your API Path
@@ -76,9 +89,9 @@ func GetUsers(c *gin.Context) {
 
 **Note!** Check that you have PostgreSQL enabled and running
 
-`make`
-
 `make migrate-up`
+
+`make`
 
 6. Make an request against `/api/v1/users`
 
@@ -86,3 +99,5 @@ func GetUsers(c *gin.Context) {
 curl http://localhost:8000/api/v1/users
 [{"user_id":"1","name":"Alice"}]⏎   
 ```
+
+**Note** If you will secure your API Path with Authentication middleware, it will get 401. You can check the endpoint via browser, by sign-up a user and then heading to /api/v1/users
